@@ -27,7 +27,8 @@ while True:
         phone_dao.delete_person()
 
     elif no == 4:
-        print("<4.검색>")    
+        print("<4.검색>")   
+        phone_dao.search_person()
 
     elif no == 5:
         print("*******************************************")

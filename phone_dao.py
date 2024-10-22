@@ -142,3 +142,39 @@ def delete_person():
         # 5. 자원 정리
         close(conn, cursor)
 
+
+# 검색
+def search_person():
+    try:
+        conn = get_connect()
+        cursor = conn.cursor()
+
+        # 2. 검색할 이름 또는 전화번호 입력
+        search_value = input(">이름: ")
+
+        # SQL SELECT 쿼리 실행 (이름 또는 전화번호로 검색)
+        search_query = """
+            select person_id, name, hp, company
+            from person
+            where name like %s
+        """
+
+        # 실행할 때 %search_value%로 부분 문자열 검색 (LIKE 연산자 사용)
+        cursor.execute(search_query, ('%' + search_value + '%',))
+
+        # 3. 결과 처리
+        resultset = cursor.fetchall()
+
+        if resultset:  # 검색 결과가 있을 때
+            print("검색 결과:")
+            for row in resultset:
+                print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}")
+        else:
+            print("검색된 결과가 없습니다.")
+
+    except Error as e:
+        print(f"데이터베이스 오류: {e}")
+
+    finally:
+        # 4. 자원 정리
+        close(conn, cursor)
