@@ -68,7 +68,7 @@ def get_person_list():
             person_list.append(person_vo)       # 추가하기  포문안에 있는거임
             
         for person in person_list:
-            print(f"{person['person_id']}\t{person['name']}\t{person['hp']}\t{person['company']}")
+            print(f"{person['person_id']}.\t{person['name']}\t{person['hp']}\t{person['company']}")
 
     except Error as e:
         print(f"데이터베이스 오류: {e}")
